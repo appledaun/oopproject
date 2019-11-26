@@ -126,7 +126,7 @@ public class DatabaseFrame extends Frame implements ActionListener {
 			this.end();
 			
 			// 메인 프레임 생성
-			window = new MainFrame("메인", 800, 1000, mData);
+			window = new CompareFrame("기능2", 800, 1000, mData);//new MainFrame("메인", 800, 1000, mData);
 			
 			window.start();
 		} catch (IOException error) {
