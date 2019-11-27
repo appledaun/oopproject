@@ -140,12 +140,12 @@ public class CompareFrame extends DataFrame {
 	    }
 	    
 	    for(Place p : arrPlace) {
-	    	p.getContaminant().COValue /= 310.0;
-	    	p.getContaminant().NO2Value /= 310.0;
-	    	p.getContaminant().O3Value /= 310.0;
-	    	p.getContaminant().PM10Value /= 310.0;
-	    	p.getContaminant().PM25Value /= 310.0;
-	    	p.getContaminant().SO2Value /= 310.0; 
+	    	p.getContaminant().COValue /= 309.0;
+	    	p.getContaminant().NO2Value /= 309.0;
+	    	p.getContaminant().O3Value /= 309.0;
+	    	p.getContaminant().PM10Value /= 309.0;
+	    	p.getContaminant().PM25Value /= 309.0;
+	    	p.getContaminant().SO2Value /= 309.0; 
 	    	
 	    	//소수점 3자리 밑으로 반올림 자르기
 	    	p.getContaminant().COValue = ((Math.round((p.getContaminant().COValue)*1000))/1000.0);
@@ -162,22 +162,26 @@ public class CompareFrame extends DataFrame {
 	    }
 	    /////////////////////////////////////////////////////
 	    
+	    //그래프 만들기
+	    _graph[0] = new Graph(arrPlace[0], 200, 400);
+	    _graph[1] = new Graph(arrPlace[3], 300, 300);
+	    _graph[2] = new Graph(arrPlace[4], 400, 400);
+	    
+	    
 	    graph = new ArrayList<Graph>(); i = 1;
 	    for(Place p : arrPlace) {
-	    	graph.add(new Graph(p,400, 900));
+	    	graph.add(new Graph(p, 400, 900));
 	    	System.out.println(i++);
 	    }
 	    
 	    for(Graph g : graph) {
 	    	//_graph[i] = new Graph(g);
 	    }
-	    //graphScroll = new JScrollPane(_graph);
-	    //graphScroll.setViewportView(_graph);
-	    //graphScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    graphScroll = new JScrollPane(_graph[0]);
+	    graphScroll.setViewportView(_graph[0]);
+	    graphScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	       
-	    _graph[0] = new Graph(arrPlace[0], 100, 100);
-	    _graph[1] = new Graph(arrPlace[3], 300, 300);
-	    _graph[2] = new Graph(arrPlace[4], 400, 400);
+	    
 	    //_graph.revalidate();
 	    //_graph.repaint();
 	    
@@ -199,9 +203,9 @@ public class CompareFrame extends DataFrame {
 		p1.add(p4);
 		
 		pGraph.setLayout(new FlowLayout());
-		pGraph.add(_graph[0]);
-		pGraph.add(_graph[1]);
-		pGraph.add(_graph[2]);
+		pGraph.add(graphScroll);
+		//pGraph.add(_graph[1]);
+		//pGraph.add(_graph[2]);
 		
 		
 		Container cont = getContentPane();
@@ -210,14 +214,18 @@ public class CompareFrame extends DataFrame {
 		//setSize(400, 600);
 	
 		
-		cont.setLayout(new GridLayout(2, 1));
+		cont.setLayout(new FlowLayout());
 		
 		cont.add(p1);
-		cont.add(_graph[0]);
+		cont.add(pGraph);
+		//cont.add(_graph[1]);
+		//_graph[0].repaint();
 		
 
 		itemListener listener = new itemListener();
-		contaminant[0].addActionListener(null);
+		for(JCheckBox c : contaminant) {
+			c.addActionListener(null);
+		}
 		listListener list = new listListener();
 		placeList.addListSelectionListener(list);
 		
