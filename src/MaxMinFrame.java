@@ -16,8 +16,8 @@ public class MaxMinFrame extends DataFrame {
 	
 	// 해당 프레임을 구성하는 컴포넌트들을 만들고 붙인다.
 	protected void drawComponents() {
-		Graph g = new Graph(mData.getPlaces().get(0), 100, 200);
+		//Graph g = new Graph(mData.getPlaces().get(0), 100, 200);
 		
-		add(g);
+		//add(g);
 	}
 }
